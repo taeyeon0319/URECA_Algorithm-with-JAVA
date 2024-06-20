@@ -45,9 +45,9 @@ public class Main_bj_1244_스위치켜고끄기_김태연 {
 				}
 			}else { //여자일때
 				S[c] = S[c]==0? 1:0;
-				if(c!=)
+				//if(c!=)
 				
-				int count = 1;
+				//int count = 1;
 				for(int j=1;j<=N/2;j++) {
 					if(c-j-1<0 ||c+j-1>=N) break;
 					if(S[c-j-1]==S[c+j-1]) {
