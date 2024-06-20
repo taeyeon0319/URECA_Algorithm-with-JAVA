@@ -71,8 +71,8 @@ public class Main_bj_14888_연산자끼워넣기_김태연 {
 		
 		
         perm(0);
-        long max = -10000000000L;
-        long min = 10000000000L;
+        int max = -1000000000;
+        int min = 1000000000;
         
         for(int i=0;i<answer.size();i++) {
         	if (max<answer.get(i)) max=answer.get(i);
