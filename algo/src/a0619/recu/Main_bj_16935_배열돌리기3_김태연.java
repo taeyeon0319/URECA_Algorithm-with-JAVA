@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.*;
 
 public class Main_bj_16935_배열돌리기3_김태연 {
-
+//	static void clockwise() {
+//		
+//	}
 	public static void main(String[] args) throws Exception {
 		//System.setIn(new FileInputStream("res/input_bj_16935.txt"));
 		//입력

@@ -8,6 +8,7 @@ public class BinarySearchTest {
 
 	public static void main(String[] args) throws Exception /*기본세팅2*/{
 		System.setIn(new FileInputStream("res/input_bj_0000.txt"));
+		
 		//입력
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = null;
