@@ -21,11 +21,12 @@ public class Main_bj_11000_강의실배정_김태연 {
 		
 		PriorityQueue<Integer> pq = new PriorityQueue<>();
 		Arrays.sort(C, new Comparator<int[]>() {
-			@Override
+			@Override 
 			public int compare(int[] o1, int[] o2) {
 				return o1[0]-o2[0];
 			}
 		});
+//		Arrays.sort(C, (o1, o2) -> o1[0]-o2[0]);
 		
 		
 		for(int[] time:C) {

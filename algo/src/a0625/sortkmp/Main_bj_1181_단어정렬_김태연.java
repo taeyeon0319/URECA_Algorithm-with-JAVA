@@ -22,13 +22,18 @@ public class Main_bj_1181_단어정렬_김태연 {
 		
 
 		//정렬
-		Arrays.sort(words, new Comparator<String>() {
-			@Override
-			public int compare(String o1, String o2) {
-				if (o1.length()==o2.length()) return o1.compareTo(o2);
-				return o1.length()-o2.length();
-			}
+//		Arrays.sort(words, new Comparator<String>() {
+//			@Override
+//			public int compare(String o1, String o2) {
+//				if (o1.length()==o2.length()) return o1.compareTo(o2);
+//				return o1.length()-o2.length();
+//			}
+//		});
+		Arrays.sort(words, (o1, o2) -> {
+		    if (o1.length() == o2.length()) return o1.compareTo(o2);
+		    return o1.length() - o2.length();
 		});
+
 		System.out.println(words[0]);
 		for(int i=1;i<words.length;i++) {
 			if (!words[i].equals(words[i-1])) System.out.println(words[i]);

@@ -10,6 +10,7 @@ public class Main_bj_1786_찾기_김태연 {
 		T = br.readLine();
 		P = br.readLine();
 		int[] F = new int[P.length()];
+		
 		for(int t=1, p=0;t<P.length();t++) {
 			while(p>0 && P.charAt(t)!=P.charAt(p)) p=F[p-1];
 			if(P.charAt(t)==P.charAt(p)) F[t]=++p;
@@ -22,7 +23,7 @@ public class Main_bj_1786_찾기_김태연 {
 			while(p>0&&T.charAt(t)!=P.charAt(p)) p=F[p-1];
 			if(T.charAt(t)==P.charAt(p)){
 				if(p==P.length()-1) {
-					ans.add(t-p);
+					ans.add(t-p+1); //인덱스 1번부터니까
 					p=F[p];	
 				}else {
 					++p;
@@ -30,7 +31,11 @@ public class Main_bj_1786_찾기_김태연 {
 			}
 		}
 		System.out.println(ans.size());
-		System.out.println(ans.get(0)+1);
+		if(ans.size() > 0) {
+			for(int i=0;i<ans.size();i++) {
+				System.out.print(ans.get(i)+" "); 
+			}
+		}
 		br.close();
 		
 	}
