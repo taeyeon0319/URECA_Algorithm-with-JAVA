@@ -1,5 +1,5 @@
 package a0626.listtree;
-
+/*stack을 이용하는 방법 & ListIterator인터페이스 활용*/
 import java.io.*;
 import java.util.*;
 

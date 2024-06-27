@@ -1,5 +1,5 @@
 package a0626.listtree;
-
+/*SIZE가 안정해져있어서 node로 함 풀어보자. */
 import java.io.*;
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class Main_bj_1991_트리순회_김태연 {
 			if(right !='.') {
 				nodes[lastIndex*2+1] = right;
 			}
-//			System.out.println(Arrays.toString(nodes));
+			System.out.println(Arrays.toString(nodes));
 		}
 //		void add(Character t) {
 //			boolean check = false;
@@ -81,7 +81,7 @@ public class Main_bj_1991_트리순회_김태연 {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			int N = Integer.parseInt(br.readLine());
 			CompleteBinaryTree<Character> tree = new CompleteBinaryTree<>(N);
-			for(int i=0;i<N;i++) {
+			for(int i=0;i<5;i++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
 				char p = st.nextToken().charAt(0);
 				char l = st.nextToken().charAt(0);

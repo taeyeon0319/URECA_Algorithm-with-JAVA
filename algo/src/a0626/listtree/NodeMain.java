@@ -6,7 +6,7 @@ import java.util.*;
 public class NodeMain {
 	static class Node{
 		int vertex; //정점 번호(data)
-		Node link; //다음 정점(next)
+		Node link; //다음 정점(next/right)
 		Node(int vertex, Node link){
 			this.vertex=vertex;
 			this.link = link;
