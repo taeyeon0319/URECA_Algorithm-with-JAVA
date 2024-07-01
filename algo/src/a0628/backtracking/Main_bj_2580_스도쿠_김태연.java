@@ -43,10 +43,10 @@ public class Main_bj_2580_스도쿠_김태연 {
 		}
 		if(sudoku[row][col]==0) {
 			for(int i=1;i<=9;i++) {
-				sudoku[row][col]=i;
+				sudoku[row][col]=i; //방문처리(숫자 넣기)
 //				System.out.println(isAvailable(row, col, i) +" " + row+ " " + col + ""+i);
 				if(isAvailable(row, col, i)) fill(row, col+1);
-				sudoku[row][col] = 0;
+				sudoku[row][col] = 0; //아니면 방문처리 초기화(다시 숫자 초기화)
 			}
 		}else {
 			fill(row, col+1);
