@@ -64,6 +64,8 @@ public class Main_bj_1260_DFS와BFS_김태연 {
 		
 		visited = new boolean[N+1];
 		bfs(V);
+		
+		br.close();
 
 	}
 
