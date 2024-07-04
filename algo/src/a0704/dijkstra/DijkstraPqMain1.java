@@ -1,11 +1,11 @@
-package a0703.prim;
+package a0704.dijkstra;
 
 import java.io.*;
 import java.util.*;
 
-public class PrimPqMain1 {
+public class DijkstraPqMain1 {
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("src/a0703/prim/input_prim.txt"));
+		System.setIn(new FileInputStream("src/a0704/dijkstra/input_dijkstra.txt"));
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 
@@ -18,14 +18,13 @@ public class PrimPqMain1 {
 		}
 		
 		boolean[] v = new boolean[N];
-		int[] minEdge = new int[N]; //Arrays.fill(minEdge, Integer.MAX_VALUE);
-		for(int i=0;i<N;i++) minEdge[i] = Integer.MAX_VALUE;
+		int[] dist = new int[N]; 
+		for(int i=0;i<N;i++) dist[i] = Integer.MAX_VALUE;
 		
 		PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2)->Integer.compare(o1[1], o2[1])); //비용에 대한 오름차순
-		int sum=0, cnt=0;
-		minEdge[0]=0;
-		pq.offer(new int[] {0, minEdge[0]}); //정점, 비용
-		System.out.println(Arrays.toString(minEdge)); System.out.println();
+		dist[0]=0;
+		pq.offer(new int[] {0, dist[0]}); //정점, 비용
+		System.out.println(Arrays.toString(dist)); System.out.println();
 		while(!pq.isEmpty()) {
 			int[] vw = pq.poll();
 			int minVertex = vw[0];//최소비용의 정점번호
@@ -33,20 +32,19 @@ public class PrimPqMain1 {
 			if(v[minVertex]) continue; //싸이클을 없앰
 			
 			v[minVertex]=true; //방문처리를 안해도 되긴 하지만 끝까지 도는 것이기 때문에 방문처리를 통해 시간과 메모리를 아끼자.
-			sum+=min;
 			System.out.println(Arrays.toString(v)); //방문처리확인
-			System.out.println("minVertex="+minVertex+" min="+min+" sum="+sum);
-			if(cnt++==N-1) break; //완성되었는지 확인
+			System.out.println("minVertex="+minVertex+" min="+min);
+			if(minVertex==N-1) break; //완성되었는지 확인
 			
 			for(int[] j:g[minVertex]) {
-				if(!v[j[0]] && minEdge[j[0]]>j[1]) {
-					minEdge[j[0]]=j[1]; //minEdge갱신
-					pq.offer(new int[] {j[0], minEdge[j[0]]});
+				if(!v[j[0]] && dist[j[0]]>min+j[1]) {
+					dist[j[0]]=min+j[1]; //minEdge갱신
+					pq.offer(new int[] {j[0], dist[j[0]]});
 				}
 			}
 			
 		}
-		System.out.println(sum);
+		System.out.println(dist[N-1]);
 		sc.close();
 	}
 

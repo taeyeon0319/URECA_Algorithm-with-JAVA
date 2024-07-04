@@ -8,7 +8,8 @@ public class PrimMainaaaa{
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		
-		List<int[]>[] g = new List[N]; for(int i=0;i<N;i++) g[i]=new ArrayList<>();
+		List<int[]>[] g = new List[N]; 
+		for(int i=0;i<N;i++) g[i]=new ArrayList<int[]>();
 		for(int i=0;i<N;i++) {
 			for(int j=0;j<N;j++) {
 				int c = sc.nextInt();
@@ -18,10 +19,10 @@ public class PrimMainaaaa{
 		
 		boolean[] v = new boolean[N];
 		int[] minEdge = new int[N];
-		for(int i=0;i<N;i++) minEdge[i]=Integer.MAX_VALUE;
+		for(int i=0;i<N;i++) minEdge[i] = Integer.MAX_VALUE;
 		
 		int sum=0, cnt=0;
-		minEdge[0] = 0;
+		minEdge[0]=0;
 		for(int i=0;i<N;i++) {
 			int minVertex = -1;
 			int min = Integer.MAX_VALUE;
@@ -32,16 +33,15 @@ public class PrimMainaaaa{
 				}
 			}
 			
-			v[minVertex]=true;
+			v[minVertex] = true;
 			sum+=min;
-			if(cnt++==N-1) continue;
+			if(cnt++==N-1) break;
 			
 			for(int[] j:g[minVertex]) {
 				if(!v[j[0]] && minEdge[j[0]]>j[1]) {
 					minEdge[j[0]]=j[1];
 				}
 			}
-			
 		}
 		System.out.println(sum);
 		sc.close();

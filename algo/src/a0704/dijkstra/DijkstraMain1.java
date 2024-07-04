@@ -1,11 +1,11 @@
-package a0703.prim;
+package a0704.dijkstra;
 
 import java.io.*;
 import java.util.*;
 
-public class PrimMain1 {
+public class DijkstraMain1 {
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("src/a0703/prim/input_prim.txt"));
+		System.setIn(new FileInputStream("src/a0704/dijkstra/input_dijkstra.txt"));
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 
@@ -23,36 +23,34 @@ public class PrimMain1 {
 		    }
 		}
 		boolean[] v = new boolean[N];
-		int[] minEdge = new int[N]; //Arrays.fill(minEdge, Integer.MAX_VALUE);
-		for(int i=0;i<N;i++) minEdge[i] = Integer.MAX_VALUE;
+		int[] dist = new int[N]; //Arrays.fill(minEdge, Integer.MAX_VALUE);
+		for(int i=0;i<N;i++) dist[i] = Integer.MAX_VALUE;
 		
-		int sum=0, cnt=0;
-		minEdge[0]=0;
-		System.out.println(Arrays.toString(minEdge)); System.out.println();
+		dist[0]=0;
+		System.out.println(Arrays.toString(dist)); System.out.println();
 		for(int i=0;i<N;i++) {
 			int minVertex = -1;
 			int min = Integer.MAX_VALUE;
 			for(int j=0;j<N;j++) {
-				if(!v[j] && min>minEdge[j]) {
-					min=minEdge[j];
+				if(!v[j] && min>dist[j]) {
+					min=dist[j];
 					minVertex=j;
 				}
 			}
 			
 			v[minVertex]=true;
-			sum+=min;
 			System.out.println(Arrays.toString(v)); //방문처리확인
-			System.out.println("minVertex="+minVertex+" min="+min+" sum="+sum);
-			if(cnt++==N-1) break;
+			System.out.println("minVertex="+minVertex+" min="+min);
+			if(minVertex==N-1) break;
 			
 			for(int[] j:g[minVertex]) {
-				if(!v[j[0]] && minEdge[j[0]]>j[1]) {
-					minEdge[j[0]]=j[1]; //
+				if(!v[j[0]] && dist[j[0]]>min+j[1]) {
+					dist[j[0]]=min+j[1]; //
 				}
 			}
 			
 		}
-		System.out.println(sum);
+		System.out.println(dist[N-1]);
 		sc.close();
 	}
 
