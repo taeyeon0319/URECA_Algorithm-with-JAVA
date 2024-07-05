@@ -30,7 +30,7 @@ public class Main_bj_1753_최단경로_김태연 {
 		for(int i=0;i<V+1;i++) d[i]=Integer.MAX_VALUE;
 		
 		d[K]=0;
-		for(int i=1;i<V;i++) {
+		for(int i=1;i<=V;i++) {
 			int minVertex = -1;
 			int min = Integer.MAX_VALUE;
 			for(int j=1;j<=V;j++) {
@@ -39,7 +39,7 @@ public class Main_bj_1753_최단경로_김태연 {
 					minVertex = j;
 				}
 			}
-			
+			if (minVertex==-1) break;
 			v[minVertex]=true;
 //			if(minVertex==V) break;
 			
