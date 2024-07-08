@@ -10,7 +10,6 @@ public class Main_bj_12865_평범한배낭_김태연 {
 		st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
-		int people = Integer.parseInt(st.nextToken());
 		int[] weight = new int[N+1];
 		int[] profit = new int[N+1];
 	
@@ -24,12 +23,15 @@ public class Main_bj_12865_평범한배낭_김태연 {
 		
 		int[] dp = new int[K+1]; 
 		for(int i=0;i<N;i++) {
-			for(int w=K;w>0;w--) {
-				if(weight[i]<=w) {
-					dp[w]= Math.max(dp[w], profit[i]+dp[w-weight[i]]);
-				}else {
-					dp[i] = dp[i];
-				}
+//			for(int w=K;w>0;w--) {
+//				if(weight[i]<=w) {
+//					dp[w]= Math.max(dp[w], profit[i]+dp[w-weight[i]]);
+//				}else {
+//					dp[i] = dp[i];
+//				}
+//			}
+			for(int w=K;w>=weight[i];w--) {
+				dp[w] = Math.max(dp[w], profit[i]+dp[w-weight[i]]);
 			}
 			//System.out.println(Arrays.toString(dp));
 		}
