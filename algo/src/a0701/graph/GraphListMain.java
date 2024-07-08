@@ -10,7 +10,7 @@ public class GraphListMain {
 	static List<Integer>[] g;
 	static boolean[] v;
 	
-	static void dfs(int i) {q
+	static void dfs(int i) {
 		v[i] = true;
 		System.out.println((char)(i+'A') + ""+i);
 		for(int j:g[i]) {
