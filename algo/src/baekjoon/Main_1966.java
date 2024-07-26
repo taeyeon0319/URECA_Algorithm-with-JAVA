@@ -5,34 +5,7 @@ import java.util.*;
 public class Main_1966 {
 	static int N, M;
 	static LinkedList<int[]> importance;
-	static int count;
 	
-	private static void countnum(int findnum) {
-		int[] num = importance.poll();
-		int index = num[0];
-		int n = num[1];
-		boolean status = true;
-
-		for(int i=0;i<importance.size();i++) {
-			if(n<importance.get(i)[1]) {
-				status = false;
-				break;
-			}
-		}
-		if(!status) {
-			importance.offer(new int[] {index, n});
-		}else {
-			count+=1;
-		}
-
-		if(index == findnum) {
-			System.out.println(count);
-			return;
-		}
-
-		countnum(findnum);
-		
-	}
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
@@ -46,15 +19,32 @@ public class Main_1966 {
 			for(int j=0;j<N;j++) {
 				importance.add(new int[] {j, Integer.parseInt(st.nextToken())}); //index, 값
 			}
-			count = 1;
-			countnum(M);
+			int count = 0;
 			
-//			for(int a[] : importance) {
-//				System.out.println(Arrays.toString(a));
-//			}
+			while(!importance.isEmpty()) {
+				int[] first = importance.poll();
+				boolean check = true;
+				for(int j=0;j<importance.size();j++) {
+					if(first[1]<importance.get(j)[1]) {
+						check=false;
+						importance.offer(first);
+						for(int k=0;k<j;k++) {
+							importance.offer(importance.poll());
+						}
+						break;
+					}
+				}
+				
+				if(!check) {
+					continue;
+				}
+				count++;
+				if(first[0]==M) {
+					break;
+				}
+			}
+			System.out.println(count);
 		}
-		
 	}
-
 }
 
