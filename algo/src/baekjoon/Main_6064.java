@@ -8,31 +8,27 @@ public class Main_6064 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		int T = Integer.parseInt(br.readLine());
-		int[] data = new int[4];
 		for(int i=0;i<T;i++) {
 			st = new StringTokenizer(br.readLine());
-			for(int j=0;j<4;j++) {
-				data[j] = Integer.parseInt(st.nextToken());
-			}
+			int M = Integer.parseInt(st.nextToken());
+			int N = Integer.parseInt(st.nextToken());
+			int x = Integer.parseInt(st.nextToken()) - 1;
+			int y = Integer.parseInt(st.nextToken()) - 1;
+			boolean check = false;
 			
-			int m = 0, n = 0;
-			int count = 0;
-			while(true) {
-				count+=1;
-				m = count%data[0] ==0 ? data[0] : count%data[0];
-				n = count%data[1] ==0 ? data[1] : count%data[1];
-				if(m==data[2] && n==data[3]) {
+			for(int j=x;j<(N*M);j+=M) {
+				if((j%N)==y) {
+					System.out.println(j+1);
+					check=true;
 					break;
 				}
-				if(count!=1 && m==1 && n==1) {
-					count=-1;
-					break;
-				}
-				
 			}
-			System.out.println(count);
+			if(!check) System.out.println(-1);
+			
+			
 		}
 	}
 
 }
+/*https://1-7171771.tistory.com/38*/
 
