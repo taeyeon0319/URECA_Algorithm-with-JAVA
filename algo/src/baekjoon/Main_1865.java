@@ -19,7 +19,7 @@ public class Main_1865 {
 			for(int i=0;i<M;i++) {
 				st = new StringTokenizer(br.readLine());
 				int MS = Integer.parseInt(st.nextToken()); //지점 번호1
-				int ME = Integer.parseInt(st.nextToken()); //지점 번호2
+				int ME = Integer.parseInt(st.nextToken()); //지점 번호 2
 				int MT = Integer.parseInt(st.nextToken()); //이동 시간
 			}
 			
