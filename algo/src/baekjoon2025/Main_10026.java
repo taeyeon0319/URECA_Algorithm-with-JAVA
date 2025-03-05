@@ -9,9 +9,10 @@ public class Main_10026 {
 	static Character[][] graph_rg;
 	static int[] dx = {0, 0, 1, -1};
 	static int[] dy = {1, -1, 0, 0};
-	static int result =0;
-	public static void bfs(int x, int y, Character c) {
-		graph[x][y] = 'O';
+	static int result = 0;
+	
+	public static void bfs(int x, int y, Character c, Character[][] g) {
+		g[x][y] = 'O';
 		ArrayDeque<int[]> q = new ArrayDeque<>();
 		q.offer(new int[] {x, y});
 		while(!q.isEmpty()) {
@@ -21,11 +22,11 @@ public class Main_10026 {
 			for(int i=0;i<4;i++) {
 				int nx = dx[i]+x;
 				int ny = dy[i]+y;
-				
+
 				if(nx>=0 && nx<N && ny>=0 && ny<N) {
-					if(graph[nx][ny]==c) {
+					if(g[nx][ny]==c) {
 						q.offer(new int[] {nx, ny});
-						graph[nx][ny] = 'O';
+						g[nx][ny] = 'O';
 					}
 					
 				}
@@ -33,9 +34,10 @@ public class Main_10026 {
 		}
 		result +=1;
 	}
+	
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
+		N = Integer.parseInt(br.readLine());
 		graph = new Character[N][N];
 		graph_rg = new Character[N][N];
 		
@@ -50,21 +52,24 @@ public class Main_10026 {
 		for(int i=0;i<N;i++) {
 			for(int j=0;j<N;j++) {
 				if(graph[i][j]!='O') {
-					bfs(i, j, graph[i][j]);
+					bfs(i, j, graph[i][j], graph);
 				}
-				for(Character[] a : graph) {
-					System.out.println(Arrays.toString(a));
+				if(graph_rg[i][j]=='G') {
+					graph_rg[i][j] = 'R';
 				}
-				System.out.println("=============");
-				
 			}
 		}
-		
-		for(Character[] a : graph) {
-			System.out.println(Arrays.toString(a));
+		System.out.print(result+" ");
+		result = 0;
+		for(int i=0;i<N;i++) {
+			for(int j=0;j<N;j++) {
+				if(graph_rg[i][j]!='O') {
+					bfs(i, j, graph_rg[i][j], graph_rg);
+				}
+			}
 		}
 		System.out.println(result);
-		
+
 		br.close();
 	}
 }
