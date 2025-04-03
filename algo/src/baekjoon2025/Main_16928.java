@@ -14,7 +14,9 @@ public class Main_16928 {
 		int M = Integer.parseInt(st.nextToken());
 		
 		List<Integer>[] graph = new List[101];
-		for(int i=0;i<=100;i++) graph[i] = new ArrayList<>();
+		for(int i=0;i<=100;i++) {
+			graph[i] = new ArrayList<>();
+		}
 		
 		for(int i=0;i<N;i++) {
 			st = new StringTokenizer(br.readLine());
@@ -29,28 +31,31 @@ public class Main_16928 {
 			int v = Integer.parseInt(st.nextToken());
 			graph[u].add(v);
  		}
-	
-		boolean[] visited = new boolean[101];
+		
+		int[] count = new int[101];
+		Arrays.fill(count, Integer.MAX_VALUE);
+		count[1] = 0;
+		
 		ArrayDeque<Integer> q = new ArrayDeque<>();
 		q.offer(1);
-		visited[1] = true;
-		
-		int[] result = new int[101];
-		Arrays.fill(result, -1);
-		result[1] = 0;
-		
-		while(!q.isEmpty() && !visited[100]) {
-			int n = q.poll();
+		while(!q.isEmpty()&&count[100]==Integer.MAX_VALUE) {
+			int num = q.poll();
 			for(int i=1;i<=6;i++) {
-				int nn = n+i;
-				if(0<nn && nn<=100 && !visited[nn]) {
-					if(!graph[nn].isEmpty()) {
-						nn = graph[nn].get(0);
-					}
-					if(!visited)
+				int nn = num+i;
+				if(nn>100) {
+					continue;
+				}
+				if(graph[nn].size()!=0) {
+					nn = graph[nn].get(0);
+				}
+				if(nn>0&&nn<=100&&count[nn]>count[num]+1) {
+					count[nn] = count[num]+1;
+					q.offer(nn);
 				}
 			}
 		}
+		System.out.println(count[100]);
+		
 		br.close();
 	}
 }
