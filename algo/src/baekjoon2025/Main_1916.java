@@ -29,7 +29,7 @@ public class Main_1916 {
 		
 		int[] distance = new int[N+1];
 		Arrays.fill(distance, Integer.MAX_VALUE);
-		distance[start] = 0;
+		distance[start] = 0; 
 		
 		boolean[] visited= new boolean[N+1];
 		
