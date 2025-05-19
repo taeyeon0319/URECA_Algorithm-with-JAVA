@@ -4,91 +4,93 @@ import java.io.*;
 import java.util.*;
 
 public class Main_1043 {
-	static int[] parents;
-	static List<Integer> knowPeopleList;
+	static int N, M;
+	static int[] parentList;
+	static List<Integer> knowpeoplelist;
 	
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		
 		st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken()); //사람의 수
-		int M = Integer.parseInt(st.nextToken()); //파티의 수
+		N = Integer.parseInt(st.nextToken()); //사람의 수
+		M = Integer.parseInt(st.nextToken()); //파티의 수
 		
-		//최상위 부모
-		parents = new int[N+1];
-		for(int i=1;i<=N;i++) { parents[i] = i;};
-		
+		parentList = new int[N+1]; //최상위 부모 리스트
+		for(int i=1;i<=N;i++) {
+			parentList[i] = i;
+		}
 		
 		st = new StringTokenizer(br.readLine());
-		int know = Integer.parseInt(st.nextToken()); //비밀을 아는 사람의 수
+		int knowpeoplecnt = Integer.parseInt(st.nextToken()); //진실을 아는 사람의 수
+		knowpeoplelist = new ArrayList<>(); //진실을 아는 사람들의 번호
 		
-		knowPeopleList = new ArrayList<>();
-		if(know==0) {
+		if (knowpeoplecnt==0){
 			System.out.println(M);
 			return;
 		}else {
-			for(int i=0;i<know;i++) {
-				knowPeopleList.add(Integer.parseInt(st.nextToken()));
+			for(int i=0;i<knowpeoplecnt;i++) {
+				knowpeoplelist.add(Integer.parseInt(st.nextToken()));
 			}
 		}
-		
-	
-		List<Integer>[] partyPeople = new List[M];
+		List<Integer>[] partypeople = new List[M];
 		for(int i=0;i<M;i++) {
-			partyPeople[i] = new ArrayList<>();
+			partypeople[i] = new ArrayList<>();
 		}
 		
-		//파티
 		for(int i=0;i<M;i++) {
 			st = new StringTokenizer(br.readLine());
-			int partyNum = Integer.parseInt(st.nextToken());
+			int partypeoplecnt = Integer.parseInt(st.nextToken());
 			int x = Integer.parseInt(st.nextToken());
-			partyPeople[i].add(x);
-			
-			for(int j=1;j<partyNum;j++) {
+			partypeople[i].add(x);
+			for(int j=0;j<partypeoplecnt-1;j++) {
 				int y = Integer.parseInt(st.nextToken());
-				union(x, y); //x와 y가 같은 그룹인 걸 엮기 -- 최상위 부모가 같다.
-				partyPeople[i].add(y);
+				union(x, y);
+				partypeople[i].add(y);
 			}
-			
 		}
 		
 		int result = 0;
 		for(int i=0;i<M;i++) {
-			boolean partyOK = true; //파티 가능
-			for(int p :partyPeople[i]) {
-				if(knowPeopleList.contains(find(p))) {
-					partyOK = false;
+			boolean nobody = true;
+			for(int p : partypeople[i]) {
+				if(knowpeoplelist.contains(findParent(p))) {
+					nobody = false;
 					break;
 				}
 			}
-			if(partyOK) {
-				result++;
+			if(nobody) {
+				result+=1;
 			}
 		}
 		System.out.println(result);
-		
+
 		br.close();
 
 	}
-	
-	//합치는 union
-	static void union(int x, int y) {
-		int px = find(x); //x의 최상위 부모
-		int py = find(y); //y의 최상위 부모
-		if(knowPeopleList.contains(py)) {
-			int tmp = px;
-			px = py;
-			py = tmp;
+
+	//하나의 그룹으로 만들어 최상위 부모를 일치시켜라
+	private static void union(int x, int y) {
+		int parent_x = findParent(x);
+		int parent_y = findParent(y);
+		if(knowpeoplelist.contains(parent_y)){
+			int tmp = parent_x;
+			parent_x = parent_y;
+			parent_y = tmp;
 		}
+		parentList[parent_y] = parent_x;
 		
-		parents[py] = px;
+	}
+
+	//최상위 부모를 찾아라
+	private static int findParent(int x) {
+		if(x==parentList[x]) {
+			return x;
+		}else {
+			return findParent(parentList[x]);
+		}
 	}
 	
-	//최상위 부모를 찾는 find
-	static int find(int x) {
-		if(parents[x]==x) return x;
-		return find(parents[x]);
-	}
+	
 }
+
