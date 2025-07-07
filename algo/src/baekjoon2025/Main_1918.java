@@ -16,19 +16,17 @@ public class Main_1918 {
 			
 			//c가 알파벳이면
 			if(c>='A' && c<='Z') {
-				answer.add(c);
-			}
-			//c가 연산자라면
-			else {
+				answer.add(c);;
+			}else {
 				if(c=='(') {
 					sign.push(c);
 				}else if(c==')') {
-					while(!sign.isEmpty() && sign.peek() !='(') {
+					while(sign.peek() != '(') {
 						answer.add(sign.pop());
 					}
-					sign.pop(); //'(' 이거 없애기
+					sign.pop();
 				}else {
-					while(!sign.isEmpty() && check(sign.peek()) >= check(c)) {
+					while(!sign.isEmpty() && check(sign.peek())>=check(c)) {
 						answer.add(sign.pop());
 					}
 					sign.push(c);
@@ -39,6 +37,7 @@ public class Main_1918 {
 			answer.add(sign.pop());
 		}
 		
+		
 		for(char ch : answer) {
 			System.out.print(ch);
 		}
@@ -46,9 +45,8 @@ public class Main_1918 {
 	}
 	
 	public static int check(char op) {
-//		if(op=='(' || op==')') return 0;
-		if(op=='+' || op=='-') return 1;
 		if(op=='*' || op=='/') return 2;
+		if(op=='+' || op=='-') return 1;
 		return -1;
 	}
 }
